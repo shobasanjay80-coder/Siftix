@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Siftix | Web Solutions. Delivered Fast.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Siftix delivers fast and affordable web solutions for modern businesses. Professional websites and custom web applications." />
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      /* Inline minimal styling for contact success/error messages */
+      .success-message, .error-message {
+        text-align: center;
+        margin-bottom: 20px;
+        font-weight: 600;
+        font-size: 1rem;
+        display: none;
+      }
+      .success-message {
+        color: #16a34a;
+      }
+      .error-message {
+        color: #dc2626;
+      }
+    </style>
+</head>
+<body>
+<header id="header">
+    <div class="container nav">
+        <div class="logo">Siftix</div>
+        <nav id="nav-menu">
+            <a href="#services">Services</a>
+            <a href="#portfolio">Portfolio</a>
+            <a href="#about">Why Us</a>
+            <a href="#contact" class="btn-nav">Contact</a>
+        </nav>
+        <div class="hamburger" onclick="toggleMenu()">☰</div>
+    </div>
+</header>
+
+<section class="hero">
+    <div class="container hero-content fade-in">
+        <h1>Build Your Business Online — Fast & Affordable</h1>
+        <p>Professional websites and web applications delivered quickly without breaking your budget.</p>
+        <a href="#contact" class="btn-primary">Get Free Consultation</a>
+        <p style="margin-top: 20px;">Build Faster. Grow Smarter🚀</p>
+    </div>
+</section>
+
+<section id="services" class="services">
+    <div class="container">
+        <h2 class="section-title">Our Services</h2>
+        <div class="service-grid">
+            <div class="card fade-in">
+                <h3>Business Websites</h3>
+                <p>Modern, responsive websites designed to convert visitors into loyal customers.</p>
+            </div>
+            <div class="card fade-in">
+                <h3>E-Commerce Stores</h3>
+                <p>Secure online stores with payment integration and scalable inventory management.</p>
+            </div>
+            <div class="card fade-in">
+                <h3>Custom Web Applications</h3>
+                <p>Booking systems, dashboards, and tailored digital tools for your business.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="portfolio" class="portfolio">
+    <div class="container">
+        <h2 class="section-title">Our Work</h2>
+        <div class="portfolio-grid fade-in">
+            <div class="portfolio-card">
+                <img src="https://via.placeholder.com/400x250" alt="Project 1" />
+                <h4>Business Website Demo</h4>
+            </div>
+            <div class="portfolio-card">
+                <img src="https://via.placeholder.com/400x250" alt="Project 2" />
+                <h4>Booking System App</h4>
+            </div>
+            <div class="portfolio-card">
+                <img src="https://via.placeholder.com/400x250" alt="Project 3" />
+                <h4>E-Commerce Demo</h4>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="about" class="about">
+    <div class="container fade-in">
+        <div class="why-box">
+            <h2>Why Choose Siftix</h2>
+            <div class="features">
+                <div>⚡ Fast Delivery</div>
+                <div>💰 Affordable Pricing</div>
+                <div>🧠 Clean Scalable Code</div>
+                <div>🤝 Reliable Support</div>
+                <div>📈 Growth-Focused Approach</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="testimonials" class="testimonials">
+    <div class="container">
+        <h2 class="section-title">What Our Clients Say</h2>
+        <div class="testimonial-grid fade-in">
+            <div class="testimonial-card">
+                <p>“Siftix delivered our website faster than expected and at a great price. Highly recommended!”</p>
+                <h4>— John D., Local Clinic</h4>
+            </div>
+            <div class="testimonial-card">
+                <p>“Professional, reliable, and super responsive. Our booking system works perfectly!”</p>
+                <h4>— Maria S., Salon Owner</h4>
+            </div>
+            <div class="testimonial-card">
+                <p>“The Siftix team made our online store look amazing. Sales increased within weeks!”</p>
+                <h4>— Ahmed K., Retail Shop</h4>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="contact" class="contact">
+    <div class="container fade-in">
+        <h2 class="section-title">Start Your Project</h2>
+        <div class="success-message" id="success-message">Thank you! Your message has been sent.</div>
+        <div class="error-message" id="error-message">Oops! Something went wrong. Please try again later.</div>
+        <form id="contact-form">
+            <input type="text" name="name" placeholder="Your Name" required />
+            <input type="email" name="email" placeholder="Your Email" required />
+            <textarea name="message" placeholder="Tell us about your project..." required></textarea>
+            <button type="submit" class="btn-primary">Send Message</button>
+        </form>
+    </div>
+</section>
+
+<footer>
+    <div class="container footer-content">
+        <p>© 2026 Siftix. All rights reserved.</p>
+    </div>
+</footer>
+
+<script>
+function toggleMenu() {
+    document.getElementById("nav-menu").classList.toggle("active");
+}
+
+/* Scroll animation */
+const faders = document.querySelectorAll('.fade-in');
+const appearOptions = { threshold: 0.2 };
+
+const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+    entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('appear');
+        observer.unobserve(entry.target);
+    });
+}, appearOptions);
+
+faders.forEach(fader => {
+    appearOnScroll.observe(fader);
+});
+</script>
+
+<!-- EmailJS SDK -->
+<!-- Load EmailJS SDK first, with defer to ensure it finishes loading -->
+<!-- Load SDK and wait until it fully loads -->
+<script src="https://cdn.emailjs.com/sdk/3.6/email.min.js" onload="initEmailJS()"></script>
+<script>
+function initEmailJS() {
+  // Initialize EmailJS with Public Key
+  emailjs.init('A0GvbU-km2PMf06lx');
+
+  const form = document.getElementById('contact-form');
+  const successMsg = document.getElementById('success-message');
+  const errorMsg = document.getElementById('error-message');
+
+  form.addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    successMsg.style.display = 'none';
+    errorMsg.style.display = 'none';
+
+    emailjs.sendForm('siftix-service', 'template_jgovfqj', this)
+      .then(() => {
+        successMsg.style.display = 'block';
+        form.reset();
+      })
+      .catch((error) => {
+        console.error('EmailJS error:', error);
+        errorMsg.style.display = 'block';
+      });
+  });
+}
+</script>
+
+</body>
+</html>
