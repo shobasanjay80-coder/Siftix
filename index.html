@@ -124,17 +124,19 @@
 </section>
 
 <section id="contact" class="contact">
-    <div class="container fade-in">
-        <h2 class="section-title">Start Your Project</h2>
-        <div class="success-message" id="success-message">Thank you! Your message has been sent.</div>
-        <div class="error-message" id="error-message">Oops! Something went wrong. Please try again later.</div>
-        <form id="contact-form">
-            <input type="text" name="name" placeholder="Your Name" required />
-            <input type="email" name="email" placeholder="Your Email" required />
-            <textarea name="message" placeholder="Tell us about your project..." required></textarea>
-            <button type="submit" class="btn-primary">Send Message</button>
-        </form>
-    </div>
+  <div class="container fade-in">
+    <h2 class="section-title">Start Your Project</h2>
+
+    <div class="success-message" id="success-message">Message sent successfully!</div>
+    <div class="error-message" id="error-message">Failed to send message.</div>
+
+    <form id="contact-form">
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="email" name="email" placeholder="Your Email" required />
+      <textarea name="message" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </div>
 </section>
 
 <footer>
@@ -165,36 +167,40 @@ faders.forEach(fader => {
 });
 </script>
 
-<!-- EmailJS SDK -->
-<!-- Load EmailJS SDK first, with defer to ensure it finishes loading -->
-<!-- Load SDK and wait until it fully loads -->
-<script src="https://cdn.emailjs.com/sdk/3.6/email.min.js" onload="initEmailJS()"></script>
 <script>
-function initEmailJS() {
-  // Initialize EmailJS with Public Key
-  emailjs.init('A0GvbU-km2PMf06lx');
+const form = document.getElementById('contact-form');
+const successMsg = document.getElementById('success-message');
+const errorMsg = document.getElementById('error-message');
 
-  const form = document.getElementById('contact-form');
-  const successMsg = document.getElementById('success-message');
-  const errorMsg = document.getElementById('error-message');
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  successMsg.style.display = 'none';
+  errorMsg.style.display = 'none';
 
-  form.addEventListener('submit', function(event) {
-    event.preventDefault();
+  const data = {
+    name: form.name.value,
+    email: form.email.value,
+    message: form.message.value
+  };
 
-    successMsg.style.display = 'none';
-    errorMsg.style.display = 'none';
+  try {
+    const response = await fetch('http://localhost:3000/send-email', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
 
-    emailjs.sendForm('siftix-service', 'template_jgovfqj', this)
-      .then(() => {
-        successMsg.style.display = 'block';
-        form.reset();
-      })
-      .catch((error) => {
-        console.error('EmailJS error:', error);
-        errorMsg.style.display = 'block';
-      });
-  });
-}
+    if (response.ok) {
+      successMsg.style.display = 'block';
+      form.reset();
+    } else {
+      throw new Error('Network response was not ok');
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    errorMsg.style.display = 'block';
+  }
+});
 </script>
 
 </body>
