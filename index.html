@@ -125,17 +125,27 @@
 
 <section id="contact" class="contact">
   <div class="container fade-in">
-    <h2 class="section-title">Start Your Project</h2>
+    <h2 class="section-title">Get In Touch</h2>
 
-    <div class="success-message" id="success-message">Message sent successfully!</div>
-    <div class="error-message" id="error-message">Failed to send message.</div>
+    <div class="contact-info">
+      <div class="contact-card">
+        <h3>📧 Email</h3>
+        <p><a href="mailto:hello@siftix.com">shobasanjay.80@gmail.com</a></p>
+      </div>
 
-    <form id="contact-form">
-      <input type="text" name="name" placeholder="Your Name" required />
-      <input type="email" name="email" placeholder="Your Email" required />
-      <textarea name="message" placeholder="Your Message" required></textarea>
-      <button type="submit">Send Message</button>
-    </form>
+      <div class="contact-card">
+        <h3>📞 Phone</h3>
+        <p><a href="tel:+911234567890">+91 82484 87382</a></p>
+      </div>
+
+      <div class="contact-card">
+        <h3>📍 Location</h3>
+        <p>Cuddalore, India</p>
+      </div>
+
+
+    </div>
+
   </div>
 </section>
 
@@ -167,43 +177,6 @@ faders.forEach(fader => {
 });
 </script>
 
-<script>
-const form = document.getElementById('contact-form');
-const successMsg = document.getElementById('success-message');
-const errorMsg = document.getElementById('error-message');
-
-form.addEventListener('submit', async (e) => {
-  e.preventDefault();
-  successMsg.style.display = 'none';
-  errorMsg.style.display = 'none';
-
-  const data = {
-    name: form.name.value,
-    email: form.email.value,
-    message: form.message.value
-  };
-
-  try {
-    const response = await fetch("http://localhost:3000/send-email", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify(data)
-});
-
-    if (response.ok) {
-      successMsg.style.display = 'block';
-      form.reset();
-    } else {
-      throw new Error('Network response was not ok');
-    }
-  } catch (error) {
-    console.error('Error:', error);
-    errorMsg.style.display = 'block';
-  }
-});
-</script>
 
 </body>
 </html>
-
-
